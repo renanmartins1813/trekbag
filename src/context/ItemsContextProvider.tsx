@@ -21,13 +21,61 @@ export default function ItemsContextProvider({ children }: ItemsContextProviderP
 
         setItems((prev) => [...prev, newItem]);
     }
+    function handleDeleteItem(id: number) {
+        const newItems: Item[] = items.filter((item) => {
+            return item.id !== id
+        })
+
+        setItems(newItems)
+    }
+    function handleToggleCheck(id: number) {
+        const newItems: Item[] = items.map((item) => {
+            if (item.id === id) {
+                return { ...item, checked: !item.checked }
+            }
+
+            return item
+        })
+
+        setItems(newItems)
+    }
+    function handleMarkAllAsComplete() {
+        const newItems: Item[] = items.map((item) => {
+            return { ...item, checked: true }
+        })
+
+        setItems(newItems)
+    }
+    function handleMarkAllAsIncomplete() {
+        const newItems: Item[] = items.map((item) => {
+            return { ...item, checked: false }
+        })
+
+        setItems(newItems)
+    }
+    function handleResetToInitial() {
+        setItems(initialItems)
+    }
+
+    function handleRemoveAllItems() {
+        setItems([])
+    }
 
     useEffect(() => {
         localStorage.setItem("items", JSON.stringify(items));
     }, [items]);
 
     return (
-        <ItemsContext.Provider value={{ items, handleAddItem }}>
+        <ItemsContext.Provider value={{
+            items,
+            handleAddItem,
+            handleDeleteItem,
+            handleToggleCheck,
+            handleMarkAllAsComplete,
+            handleMarkAllAsIncomplete,
+            handleRemoveAllItems,
+            handleResetToInitial,
+        }}>
             {children}
         </ItemsContext.Provider>
     );

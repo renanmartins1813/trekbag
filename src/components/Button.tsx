@@ -1,11 +1,12 @@
 type ButtonProps = {
     buttonType: string,
+    onClick: React.MouseEventHandler<HTMLButtonElement>,
     children: React.ReactNode | React.ReactNode[]
 }
 
-export default function Button({ buttonType, children }: ButtonProps) {
+export default function Button({ buttonType, onClick, children }: ButtonProps) {
     return (
-        <button className={`btn ${buttonType === "secondary" ? "btn--secondary" : ""}`}>{children}</button>
+        <button onClick={onClick} className={`btn ${buttonType === "secondary" ? "btn--secondary" : ""}`}>{children}</button>
     )
 }
 

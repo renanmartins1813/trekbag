@@ -7,8 +7,14 @@ export type Item = {
 };
 
 export type ItemsContextType = {
-    items: Item[];
-    handleAddItem: (newItemName: string) => void;
+    items: Item[],
+    handleAddItem: (newItemName: string) => void,
+    handleDeleteItem: (id: number) => void,
+    handleToggleCheck: (id: number) => void,
+    handleRemoveAllItems: () => void,
+    handleResetToInitial: () => void,
+    handleMarkAllAsComplete: () => void,
+    handleMarkAllAsIncomplete: () => void,
 };
 
 export const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
