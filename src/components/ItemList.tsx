@@ -1,4 +1,5 @@
 import { initialItems } from "../lib/constants"
+import EmptyView from "./EmptyView"
 
 type ItemProps = {
     // id: number,
@@ -20,11 +21,13 @@ function Item({ name, checked }: ItemProps) {
 
 export default function ItemList() {
     return (
-        <section>
+        <ul className="item-list">
+            {initialItems.length === 0 && <EmptyView />}
+
             {initialItems.map((item) => {
                 return <Item key={item.id} name={item.name} checked={item.checked} />
             })}
-        </section>
+        </ul>
     )
 }
 
